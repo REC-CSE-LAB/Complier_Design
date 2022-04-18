@@ -5,9 +5,9 @@
 
 // default keywords, symbols and operators of 'c'.
 const char keywords [32][10] = { "int", "char", "short", "float", "auto", "double", "struct", "break", "if", "else",
-								 "long", "switch", "case", "enum", "register", "typedef","extern", "return", "union",
-								 "const", "unsigned", "continue", "for", "signed", "void", "default", "goto", "sizeof",
-								 "volatile", "do", "static", "while" };
+				 "long", "switch", "case", "enum", "register", "typedef","extern", "return", "union",
+				 "const", "unsigned", "continue", "for", "signed", "void", "default", "goto", "sizeof",
+				 volatile", "do", "static", "while" };
 //const char symbols [20] = { ',', '<', '>', '.',  '(', ')', ';', '$', ':', '#', '[', ']', '\'', '\"', '{', '}', '~', '-', '?'};
 //const char operators [12] = { '+', '-', '*', '/', '%', '!', '&', '<', '>', '=', '|' };
 
