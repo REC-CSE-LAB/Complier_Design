@@ -7,7 +7,7 @@
 const char keywords [32][10] = { "int", "char", "short", "float", "auto", "double", "struct", "break", "if", "else",
 				 "long", "switch", "case", "enum", "register", "typedef","extern", "return", "union",
 				 "const", "unsigned", "continue", "for", "signed", "void", "default", "goto", "sizeof",
-				 volatile", "do", "static", "while" };
+				 "volatile", "do", "static", "while" };
 //const char symbols [20] = { ',', '<', '>', '.',  '(', ')', ';', '$', ':', '#', '[', ']', '\'', '\"', '{', '}', '~', '-', '?'};
 //const char operators [12] = { '+', '-', '*', '/', '%', '!', '&', '<', '>', '=', '|' };
 
@@ -66,7 +66,7 @@ int main()
 	puts("\t\tTokens");
 	puts("\n--------------------------------------------\n");
 
-	// token generator
+	// token generator logic 
 	for ( int i = 0; (ch = getc(ptr)) != EOF;  i = 0, buffer[0] = '\0' )
 	{
 		// check only for identifiers and keywords
