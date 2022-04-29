@@ -26,7 +26,7 @@ int main()
 	int is_special_symbol ( const char ch );
 
 	// Assigning file address to file pointer
-	ptr = fopen ("code.txt", "w");
+	ptr = fopen ("code.c", "w");
 
 	// Checking for any possible errors due to file operation
 	if( ptr == NULL )
@@ -49,7 +49,7 @@ int main()
 	
 	// reassigning file pointer as read mode
 	fclose(ptr);
-	ptr = fopen("code.txt", "r");
+	ptr = fopen("code.c", "r");
 
 	// Checking for any possible errors due to file operation
 	if( ptr == NULL )
@@ -206,9 +206,14 @@ int main()
 			buffer[i++] = ch;
 			ch = getc(ptr);
 			
+			
+			
 			// making sure that it's a comment
-			if( ch != '/' && ch != '*')
+			if( ch != '/' && ch != '*' )
+			{ 
+				printf("%-10c is an operator.\n",buffer[0]);
 				ungetc(ch,ptr);
+			}
 				
 			// for single-line comment
 			else if ( ch == '/' )
