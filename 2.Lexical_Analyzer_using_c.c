@@ -199,6 +199,50 @@ int main()
 			}
 		}
 		
+		// check for comments
+		else if ( ch == '/' )
+		{
+			// storing in buffer and reading the next element in the file
+			buffer[i++] = ch;
+			ch = getc(ptr);
+			
+			// making sure that it's a comment
+			if( ch != '/' && ch != '*')
+				ungetc(ch,ptr);
+				
+			// for single-line comment
+			else if ( ch == '/' )
+			{
+				while( (ch = getc(ptr)) != EOF )
+				{
+					if( ch == '\n' )
+					{
+						lines_count++;
+						break;
+					}
+				}
+			}
+			
+			// for multi-line comment
+			else if ( ch == '*' )
+			{
+				buffer[i++] = ch;
+				while( (ch = getc(ptr)) != EOF )
+				{
+					buffer[i++] = ch;
+					if ( ch == '\n' )
+						lines_count++;
+					else if ( ch == '/' && buffer[i-1] == '*' && i-1 > 1 )
+						break;
+				}
+				buffer[i-1] = '\0';
+				
+				// checking for possible invalid comments
+				if( ch == EOF )
+					printf("%-10s is an invalid multi-line comment\n",buffer);
+			}
+		}
+		
 		// check only for special symbols and operator
 		else if( ch != ' ' && ch != '\n' && ch != '\t'  )
 		{
