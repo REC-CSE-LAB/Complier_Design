@@ -8,8 +8,8 @@ const char keywords [32][10] = { "int", "char", "short", "float", "auto", "doubl
 				 "long", "switch", "case", "enum", "register", "typedef","extern", "return", "union",
 				 "const", "unsigned", "continue", "for", "signed", "void", "default", "goto", "sizeof",
 				 "volatile", "do", "static", "while" };
-//const char symbols [20] = { ',', '<', '>', '.',  '(', ')', ';', '$', ':', '#', '[', ']', '\'', '\"', '{', '}', '~', '-', '?'};
-//const char operators [12] = { '+', '-', '*', '/', '%', '!', '&', '<', '>', '=', '|' };
+// const char symbols [20] = { ',', '<', '>', '.',  '(', ')', ';', '$', ':', '#', '[', ']', '\'', '\"', '{', '}', '~', '-', '?'};
+// const char operators [12] = { '+', '-', '*', '/', '%', '!', '&', '<', '>', '=', '|' };
 
 int main()
 {
@@ -154,12 +154,15 @@ int main()
 						end_flag = 0;
 						break;
 					}
-;
 				}
 				
 				// if ch == EOF then we must replace the last index with '\0' to avoid the new line in output
 				if( end_flag )
 					buffer[i-1] = '\0';
+				else
+					buffer[i] = '\0';
+					
+				// printing status of the token
 				if(esq_flag || end_flag)
 					printf("%-10s is an invalid string literal",buffer);
 				else
@@ -176,6 +179,7 @@ int main()
 					if( ch == '\'' )
 						break;
 				}
+				buffer[i] = '\0';
 				if( strlen(buffer) == 3 || 
 					( strlen(buffer) == 4 && buffer[1] == '\\' 
 						&& ( buffer[2] == '\\'			// Backslash 
