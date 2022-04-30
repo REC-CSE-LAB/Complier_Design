@@ -8,8 +8,9 @@ const char keywords [32][10] = { "int", "char", "short", "float", "auto", "doubl
 				 "long", "switch", "case", "enum", "register", "typedef","extern", "return", "union",
 				 "const", "unsigned", "continue", "for", "signed", "void", "default", "goto", "sizeof",
 				 "volatile", "do", "static", "while" };
-//const char symbols [20] = { ',', '<', '>', '.',  '(', ')', ';', '$', ':', '#', '[', ']', '\'', '\"', '{', '}', '~', '-', '?'};
-//const char operators [12] = { '+', '-', '*', '/', '%', '!', '&', '<', '>', '=', '|' };
+
+// const char symbols [20] = { ',', '<', '>', '.',  '(', ')', ';', '$', ':', '#', '[', ']', '\'', '\"', '{', '}', '~', '-', '?'};
+// const char operators [12] = { '+', '-', '*', '/', '%', '!', '&', '<', '>', '=', '|' };
 
 int main()
 {
@@ -26,8 +27,9 @@ int main()
 	int is_special_symbol ( const char ch );
 
 	// Assigning file address to file pointer
-	ptr = fopen ("code.txt", "w");
 
+	ptr = fopen ("code.c", "w");
+  
 	// Checking for any possible errors due to file operation
 	if( ptr == NULL )
 	{
@@ -49,7 +51,8 @@ int main()
 	
 	// reassigning file pointer as read mode
 	fclose(ptr);
-	ptr = fopen("code.txt", "r");
+
+	ptr = fopen("code.c", "r");
 
 	// Checking for any possible errors due to file operation
 	if( ptr == NULL )
@@ -154,12 +157,16 @@ int main()
 						end_flag = 0;
 						break;
 					}
-;
 				}
 				
 				// if ch == EOF then we must replace the last index with '\0' to avoid the new line in output
 				if( end_flag )
 					buffer[i-1] = '\0';
+
+				else
+					buffer[i] = '\0';
+					
+				// printing status of the token
 				if(esq_flag || end_flag)
 					printf("%-10s is an invalid string literal",buffer);
 				else
@@ -176,6 +183,8 @@ int main()
 					if( ch == '\'' )
 						break;
 				}
+
+				buffer[i] = '\0';
 				if( strlen(buffer) == 3 || 
 					( strlen(buffer) == 4 && buffer[1] == '\\' 
 						&& ( buffer[2] == '\\'			// Backslash 
@@ -192,6 +201,56 @@ int main()
 					printf("%-10s is an charcter literal.\n",buffer);
 				else
 					printf("%-10s is an invalid charcter literal.\n",buffer);
+			}
+		}
+		
+
+		// check for comments
+		else if ( ch == '/' )
+		{
+			// storing in buffer and reading the next element in the file
+			buffer[i++] = ch;
+			ch = getc(ptr);
+			
+			
+			
+			// making sure that it's a comment
+			if( ch != '/' && ch != '*' )
+			{ 
+				printf("%-10c is an operator.\n",buffer[0]);
+				ungetc(ch,ptr);
+			}
+				
+			// for single-line comment
+			else if ( ch == '/' )
+			{
+				while( (ch = getc(ptr)) != EOF )
+				{
+					if( ch == '\n' )
+					{
+						lines_count++;
+						break;
+					}
+				}
+			}
+			
+			// for multi-line comment
+			else if ( ch == '*' )
+			{
+				buffer[i++] = ch;
+				while( (ch = getc(ptr)) != EOF )
+				{
+					buffer[i++] = ch;
+					if ( ch == '\n' )
+						lines_count++;
+					else if ( ch == '/' && buffer[i-1] == '*' && i-1 > 1 )
+						break;
+				}
+				buffer[i-1] = '\0';
+				
+				// checking for possible invalid comments
+				if( ch == EOF )
+					printf("%-10s is an invalid multi-line comment\n",buffer);
 			}
 		}
 		
