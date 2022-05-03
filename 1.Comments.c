@@ -25,6 +25,8 @@ int main()
 			if(flag)
 				puts("\nit is not a comment");
 		}
+		else
+			puts("\nit is not a comment");
 	}
 	else
 		puts("\nit is not a comment");
