@@ -8,13 +8,9 @@ const char keywords [32][10] = { "int", "char", "short", "float", "auto", "doubl
 				 "long", "switch", "case", "enum", "register", "typedef","extern", "return", "union",
 				 "const", "unsigned", "continue", "for", "signed", "void", "default", "goto", "sizeof",
 				 "volatile", "do", "static", "while" };
-<<<<<<< HEAD
+
 // const char symbols [20] = { ',', '<', '>', '.',  '(', ')', ';', '$', ':', '#', '[', ']', '\'', '\"', '{', '}', '~', '-', '?'};
 // const char operators [12] = { '+', '-', '*', '/', '%', '!', '&', '<', '>', '=', '|' };
-=======
-//const char symbols [20] = { ',', '<', '>', '.',  '(', ')', ';', '$', ':', '#', '[', ']', '\'', '\"', '{', '}', '~', '-', '?'};
-//const char operators [12] = { '+', '-', '*', '/', '%', '!', '&', '<', '>', '=', '|' };
->>>>>>> 89073e95648538e1581651a813a33c860963c957
 
 int main()
 {
@@ -31,8 +27,9 @@ int main()
 	int is_special_symbol ( const char ch );
 
 	// Assigning file address to file pointer
-	ptr = fopen ("code.c", "w");
 
+	ptr = fopen ("code.c", "w");
+  
 	// Checking for any possible errors due to file operation
 	if( ptr == NULL )
 	{
@@ -54,6 +51,7 @@ int main()
 	
 	// reassigning file pointer as read mode
 	fclose(ptr);
+
 	ptr = fopen("code.c", "r");
 
 	// Checking for any possible errors due to file operation
@@ -164,6 +162,7 @@ int main()
 				// if ch == EOF then we must replace the last index with '\0' to avoid the new line in output
 				if( end_flag )
 					buffer[i-1] = '\0';
+
 				else
 					buffer[i] = '\0';
 					
@@ -184,6 +183,7 @@ int main()
 					if( ch == '\'' )
 						break;
 				}
+
 				buffer[i] = '\0';
 				if( strlen(buffer) == 3 || 
 					( strlen(buffer) == 4 && buffer[1] == '\\' 
@@ -204,6 +204,7 @@ int main()
 			}
 		}
 		
+
 		// check for comments
 		else if ( ch == '/' )
 		{
