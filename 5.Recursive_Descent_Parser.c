@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <ctype.h>
-#include <string.h>
 
 // Gobal declarations
 char expr[20];
@@ -17,7 +16,7 @@ int id(char c);
 int main(void)
 {
     // Reading input
-    printf("Enter a arithmetic expression : ");
+    printf("Enter an arithmetic expression : ");
     gets(expr);
 
     // Recursive descent parser logic
