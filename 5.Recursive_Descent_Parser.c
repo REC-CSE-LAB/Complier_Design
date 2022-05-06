@@ -3,7 +3,7 @@
 #include <string.h>
 
 // Gobal declarations
-static char expr[20];
+char expr[20];
 int i = 0;
 
 // Function Prototyping
@@ -44,8 +44,7 @@ int E(void)
         else
             return 0;
     }
-    else
-        return 0;
+    return 0;
 }
 
 // Production : E' -> +TE' | ε
@@ -58,14 +57,14 @@ int E_Prime(void)
         {
             if (E_Prime())
                 return 1;
+
             else
                 return 0;
         }
         else
             return 0;
     }
-    else
-        return 1;
+    return 1;
 }
 
 // Production : T -> FT'
@@ -80,8 +79,7 @@ int T(void)
         else
             return 0;
     }
-    else
-        return 0;
+    return 0;
 }
 
 // Production : *FT' | ε
@@ -100,8 +98,7 @@ int T_Prime(void)
         else
             return 0;
     }
-    else
-        return 1;
+    return 1;
 }
 
 // Production : (E) | id
@@ -120,35 +117,22 @@ int F(void)
     }
     else if (id(expr[i]))
     {
-        ++i;
         return 1;
     }
-    else
-        return 0;
+    return 0;
 }
 
 // id refers to identifier
 int id(char c)
 {
-    // Flag value to check if it's the starting letter of the identifier.
-    static int flag = 1;
-
-    // Check if it's the starting letter of the identifier.
-    if (flag && c == '_' || c == '$' || isalpha(c))
+    if (c == '_' || isalpha(c))
     {
-        flag = 0;
+
+        while (c == '_' || isalnum(c))
+        {
+            c = expr[++i];
+        }
         return 1;
     }
-
-    // Checking remaining half of the identifier.
-    else if (c == '_' || isalnum(c))
-    {
-        return 1;
-    }
-
-    // If it's not an identifier.
-    else
-    {
-        return 0;
-    }
+    return 0;
 }
