@@ -127,7 +127,7 @@ int id(char c)
 {
     if (c == '_' || isalpha(c))
     {
-
+        c = expr[++i];
         while (c == '_' || isalnum(c))
         {
             c = expr[++i];
