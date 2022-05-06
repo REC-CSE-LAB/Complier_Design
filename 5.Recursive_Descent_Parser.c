@@ -28,6 +28,8 @@ int main(void)
         else
             puts("Rejected..!!!");
     }
+    else
+        puts("Rejected..!!!");
 
     return 0;
 }
