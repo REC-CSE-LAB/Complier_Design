@@ -1,105 +1,137 @@
 #include <stdio.h>
-#include <string.h>
 #include <ctype.h>
 
-int i = 0, flag_accept = 0, flag_error = 0;
-void E_Prime ( const char str [] );
-void T ( const char str [] );
-void T_Prime ( const char str[] );
-void F ( const char str[] );
-void id ( const char str [] );
-void E ( const char str [] );
+// Gobal declarations
+char expr[20];
+int i = 0;
 
-int main()
+// Function Prototyping
+int E(void);
+int E_Prime(void);
+int T(void);
+int T_Prime(void);
+int F(void);
+int id(char c);
+
+int main(void)
 {
-	char str[30];
+    // Reading input
+    printf("Enter an arithmetic expression : ");
+    gets(expr);
 
-	puts( "Enter an arithmetic : " );
-	gets(str);
-		
-	E( str );
-	
-	if( flag_accept == 1 && flag_error == 0 )
-		printf("Accepted...!!!");
-	else
-		printf("Rejected...!!!");
-	
-	return 0;
+    // Recursive descent parser logic
+    if (E())
+    {
+        if (expr[i + 1] == '\0')
+            puts("Accepted..!!!");
+        else
+            puts("Rejected..!!!");
+    }
+    else
+        puts("Rejected..!!!");
+
+    return 0;
 }
 
-void E ( const char str[] )
+// Production : E -> TE'
+int E(void)
 {
-	T( str );
-	E_Prime( str );
+    if (T())
+    {
+        if (E_Prime())
+            return 1;
+        else
+            return 0;
+    }
+    return 0;
 }
 
-void E_Prime ( const char str[] )
+// Production : E' -> +TE' | ε
+int E_Prime(void)
 {
-	if( str[i++] == '+' )
-	{
-		T( str );
-		E_Prime( str );
-	}
-	else
-	{
-		flag_error = 1;
-		return ;
-	}
+    if (expr[i] == '+')
+    {
+        ++i;
+        if (T())
+        {
+            if (E_Prime())
+                return 1;
+
+            else
+                return 0;
+        }
+        else
+            return 0;
+    }
+    return 1;
 }
 
-void T ( const char str[] )
+// Production : T -> FT'
+int T(void)
 {
-	F ( str );
-	T_Prime( str );
+    if (F())
+    {
+        if (T_Prime())
+        {
+            return 1;
+        }
+        else
+            return 0;
+    }
+    return 0;
 }
 
-void T_Prime ( const char str[] )
+// Production : *FT' | ε
+int T_Prime(void)
 {
-	if( str[i++] == '*' )
-	{
-		F( str );
-		T_Prime( str );
-	}
-	else
-	{
-		flag_error = 1;
-		return ;
-	}
-		
+    if (expr[i] == '*')
+    {
+        ++i;
+        if (F())
+        {
+            if (T_Prime())
+                return 1;
+            else
+                return 0;
+        }
+        else
+            return 0;
+    }
+    return 1;
 }
 
-void F ( const char str[] )
+// Production : (E) | id
+int F(void)
 {
-	if( str[i++]  == '(' && str[strlen(str)-1] == ')' )
-	{
-		E( str );
-	}
-	else
-	{
-		id( str );
-	}
+    if (expr[i] == '(')
+    {
+        ++i;
+        if (E())
+        {
+            if (expr[i] == ')')
+                return 1;
+            else
+                return 0;
+        }
+    }
+    else if (id(expr[i]))
+    {
+        return 1;
+    }
+    return 0;
 }
 
-void id ( const char str[] )
+// id refers to identifier
+int id(char c)
 {
-	char ch = str[i++];
-	if ( isalpha(ch) || ch == '_' )
-	{
-		int flag = 0;
-		while( i < strlen(str) )
-		{
-			ch = str[i++];
-			if( !isalnum(ch) || ch != '_' )
-			{
-				flag =1;
-				break;
-			}
-		}
-		if(flag)
-		{
-			flag_accept = 1;
-		}
-	}
+    if (c == '_' || isalpha(c))
+    {
+        c = expr[++i];
+        while (c == '_' || isalnum(c))
+        {
+            c = expr[++i];
+        }
+        return 1;
+    }
+    return 0;
 }
-	
-		
