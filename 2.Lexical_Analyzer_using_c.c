@@ -88,6 +88,8 @@ int main()
 				printf("%-10s is an keyword.\n",buffer);
 			else if( is_identifier( buffer ) )
 				printf("%-10s is an identifier.\n",buffer);
+			else
+				printf("%-10s is an unknown token.\n",buffer);
 			ungetc(ch,ptr);
 		}
 		
@@ -126,7 +128,7 @@ int main()
 					buffer[i++] = ch;
 
 					// checking for escape sequences in sting literal
-					if ( esq_flag && i == pervious_index )
+					if ( esq_flag && i == pervious_index+1 )
 					{
 						if ( ch == '\\' 		// Backslash 
 							 || ch == 'a'	 	// Alarm or Beep
@@ -148,7 +150,7 @@ int main()
 					if( ch == '\\' )
 					{
 						esq_flag = 1;
-						pervious_index = i+1;
+						pervious_index = i;
 					}
 					
 					// checking for the proper end of string literal

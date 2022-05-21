@@ -55,7 +55,7 @@ int main()
 	}
 	
 	// Output
-	if( state == 1 )
+	if( state == 0 || state == 1 )
 		printf("%s is accepted under rule \'a\'",str);
 	else if ( state == 3 )
 		printf("%s is accepted under rule \'abb\'",str);
