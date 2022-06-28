@@ -32,15 +32,15 @@ int main()
 	i = 0;
 	push('$');
 	push('E');
-	puts("Stack\t\tInput\t\tOperation");
+	puts("Stack\t\t\tInput\t\t\tOperation");
 	while( i < n )
 	{
 		for( k = 0; k <= top; k++ )
 			printf("%c",st[k]);
-		printf("\t\t");
+		printf("\t\t\t");
 		for( k = i; k < n; k++ )
 			printf("%c",str[k]);
-		printf("\t\t");
+		printf("\t\t\t");
 		if( flag == 1 )
 			printf("pop");
 		else if ( flag == 2 )
@@ -49,7 +49,7 @@ int main()
 		{
 			flag = 1;
 			ch = pop();
-			i++;
+			++i;
 		}
 		else
 		{
@@ -96,7 +96,7 @@ int main()
 		}
 		printf("\n");
 	}	
-	if( i == n )
+	if( i == n-1 )
 		puts("\nParser Accepted");
 	else
 		puts("\nPaser Rejected");		
