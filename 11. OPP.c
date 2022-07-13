@@ -70,7 +70,7 @@ int reduce()
 				stack [ top-t+1 ] = 'E';
 				top = top-t+1;
 				strcpy( lasthandle, handles[i] );
-				stack[top+1]='\0';
+				stack[top+1] = '\0';
 				return 1;	//successful reduction
 			}
 		}
@@ -104,7 +104,7 @@ int main()
 	
 	printf("\nSTACK\tINPUT\tACTION");
 	
-	while(i<=l)
+	while( i <= l )
 	{
 		shift();
 		printf("\n");
@@ -115,7 +115,7 @@ int main()
 		dispinput();
 		printf("\tShift");
 		
-		if(prec[getindex(stack[top])][getindex(input[i])]=='>')
+		if( prec [ getindex( stack[top] ) ][ getindex( input[i] ) ] == '>' )
 		{
 			while(reduce())
 			{
