@@ -64,7 +64,7 @@ void FIRST(char Result[], char c)
 	{
 		if (production_set[i][0] == c)
 		{
-			if (production_set[i][2] == '$')
+			if (production_set[i][2] == '#')
 				add_to_Result_Set(Result, '$');
 			else
 			{
