@@ -11,15 +11,13 @@ char t[5][6][10] = { "$", "$", "TX", "TX", "$", "$",
 
 void push ( char t )
 {
-	top++;
-	st[top] = t;
+	st[++top] = t;
 	return ;
 }
 
 char pop ( void )
 {
-	ch1 = st[top];
-	top--;
+	ch1 = st[top--];
 	return ch1;
 }
 
