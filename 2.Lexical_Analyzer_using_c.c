@@ -9,9 +9,6 @@ const char keywords [32][10] = { "int", "char", "short", "float", "auto", "doubl
 				 "const", "unsigned", "continue", "for", "signed", "void", "default", "goto", "sizeof",
 				 "volatile", "do", "static", "while" };
 
-// const char symbols [20] = { ',', '<', '>', '.',  '(', ')', ';', '$', ':', '#', '[', ']', '\'', '\"', '{', '}', '~', '-', '?'};
-// const char operators [12] = { '+', '-', '*', '/', '%', '!', '&', '<', '>', '=', '|' };
-
 int main()
 {
 
