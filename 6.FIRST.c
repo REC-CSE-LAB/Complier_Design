@@ -39,7 +39,7 @@ int main()
 		puts(" }");
 
 		printf("Press \'y\' or \'Y\' to continue : ");
-		scanf("%c", &choice);
+		scanf(" %c", &choice);
 	} while (choice == 'y' || choice == 'Y');
 
 	return 0;
