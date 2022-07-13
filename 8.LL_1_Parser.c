@@ -2,7 +2,7 @@
 #include <string.h>
 
 int i, k, n, top = -1, r, c, m, flag = 0;
-char str[25], st[25], *temp, v, ch, ch1;
+char str[25], st[25], *temp, v, ch;
 char t[5][6][10] = { "$", "$", "TX", "TX", "$", "$",
 		     "+TX", "$", "$", "$", "e", "e",
 		     "$", "$", "FY", "FY", "$", "$",
@@ -17,8 +17,7 @@ void push ( char t )
 
 char pop ( void )
 {
-	ch1 = st[top--];
-	return ch1;
+	return st[top--];
 }
 
 int main()
