@@ -72,7 +72,7 @@ void FIRST(char Result[], char c)
 
 				while (production_set[i][j] != '\0')
 				{
-					found_epsilon = 0;
+					found_epsilon = 1;
 
 					FIRST(Sub_Result, production_set[i][j]);
 
@@ -82,10 +82,10 @@ void FIRST(char Result[], char c)
 					for (k = 0; k < strlen(Sub_Result); ++k)
 						if (Sub_Result[k] == '$')
 						{
-							found_epsilon = 1;
+							found_epsilon = 0;
 							break;
 						}
-					if (!found_epsilon)
+					if (found_epsilon)
 						break;
 					j++;
 				}
